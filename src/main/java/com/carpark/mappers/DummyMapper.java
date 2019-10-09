@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface CarParkMapper {
-    List<CarPark> findBy(@Param("latitude") Double latitude, @Param("longitude") Double longitude);
+public interface DummyMapper {
+    void dummyFromCsv(@Param("path") String path);
 }

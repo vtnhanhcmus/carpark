@@ -1,19 +1,22 @@
 package com.carpark.services;
 
 import com.carpark.logics.CarParkLogic;
+import com.carpark.logics.DummyLogic;
 import com.carpark.models.CarPark;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 import java.util.List;
 
 @Service
-public class CarParkService {
+public class DummyService {
 
     @Autowired
-    private CarParkLogic carParkLogic;
+    private DummyLogic dummyLogic;
 
-    public List<CarPark> findBy(Double latitude, Double longitude){
-        return carParkLogic.findBy(latitude,longitude);
+    public void dummyFromCsv() throws IOException {
+        dummyLogic.dummyFromCsv();
     }
 
 }

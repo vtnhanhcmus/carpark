@@ -1,6 +1,6 @@
 package com.carpark.models;
 
-public class CarPark {
+public class Availability {
 
     private Integer id;
     private String carParkNo;
@@ -15,7 +15,6 @@ public class CarPark {
     private Integer carParkDecks;
     private Double gantryHeight;
     private String carParkBasement;
-    private Availability availability;
 
     public Integer getId() {
         return id;
@@ -120,13 +119,4 @@ public class CarPark {
     public void setCarParkBasement(String carParkBasement) {
         this.carParkBasement = carParkBasement;
     }
-
-    public Availability getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Availability availability) {
-        this.availability = availability;
-    }
-
 }
