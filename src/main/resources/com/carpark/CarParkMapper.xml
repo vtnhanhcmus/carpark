@@ -11,16 +11,37 @@
 
     </resultMap>
 
-    <select id="findBy" resultMap="nearestResultMap">
+    <select id="search" resultMap="nearestResultMap">
         select
+        <include refid="nearestFields"/>
+        <include refid="mainLocationNearest"/>
+        <include refid="nearestOrder"/>
+        limit #{page.offset}, #{page.size}
+    </select>
+
+    <sql id="nearestFields">
         cp.x_coord as latitude,
         cp.y_coord as longitude,
         a.total_lots,
         a.available_lots
+    </sql>
+    
+    <select id="count" resultType="int">
+        select
+        count(*) as total_record
+        <include refid="mainLocationNearest"/>
+    </select>
+    
+    <sql id="mainLocationNearest">
+
         from car_park.car_park cp
         inner join car_park.availability a on cp.id = a.car_park_id
-        where
-        cp.x_coord = #{latitude} and cp.y_coord = #{longitude}
-    </select>
+
+    </sql>
+
+    <sql id="nearestOrder">
+
+    </sql>
+    
 
 </mapper>

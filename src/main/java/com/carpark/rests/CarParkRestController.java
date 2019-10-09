@@ -1,14 +1,12 @@
 package com.carpark.rests;
 
+import com.carpark.models.CarPark;
+import com.carpark.request.LocationCriteria;
+import com.carpark.request.PagingCriteria;
 import com.carpark.services.CarParkService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("carparks")
@@ -18,8 +16,13 @@ public class CarParkRestController {
     private CarParkService carParkService;
 
     @GetMapping(value = "/nearest", produces = "application/json")
-    public String nearest(@RequestParam("latitude") Double latitude, @RequestParam("longitude") Double longitude) throws IOException {
-        return new Gson().toJson(carParkService.findBy(latitude, longitude));
+    @ResponseBody
+    public List<CarPark> nearest(@RequestParam("latitude") Double latitude,
+                                 @RequestParam("longitude") Double longitude,
+                                 @RequestParam("page") Integer page,
+                                 @RequestParam("per_page") Integer perPage
+                                 ){
+        return carParkService.search(new LocationCriteria(latitude,longitude), new PagingCriteria(page,perPage));
     }
 
 }
