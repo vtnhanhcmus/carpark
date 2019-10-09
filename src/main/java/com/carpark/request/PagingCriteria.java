@@ -13,10 +13,11 @@ public class PagingCriteria {
     public PagingCriteria(Integer size, Integer page) {
         this.size = size;
         this.page = page;
+        this.offset = (this.page - 1) * this.size;
     }
 
     public Integer getOffset() {
-        return (this.page - 1) * this.size;
+        return offset;
     }
 
     public Integer getSize() {

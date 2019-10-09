@@ -6,6 +6,7 @@ import com.carpark.models.CarPark;
 import com.carpark.request.LocationCriteria;
 import com.carpark.request.PagingCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,12 +17,15 @@ public class CarParkLogic {
     @Autowired
     private CarParkMapper carParkMapper;
 
+    @Autowired
+    MessageSource messageSource;
+
     public List<CarPark> search(LocationCriteria location,
                                         PagingCriteria pagingCriteria) throws PagingException{
 
         Integer totalRecords = carParkMapper.count(location);
-        if (!pagingCriteria.isValidOffset(totalRecords)){
-            throw new PagingException("offset not bigger than total records");
+        if (pagingCriteria.isValidOffset(totalRecords)){
+            throw new PagingException(messageSource.getMessage("page.range.error", null, null));
         }
 
         List<CarPark> carParks = carParkMapper.search(location,pagingCriteria);
