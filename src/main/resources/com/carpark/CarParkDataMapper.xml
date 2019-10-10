@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpark.mappers.CarParkDataMapper" >
+
+    <insert id="insert">
+        insert into
+        car_park.carpark_data(
+        car_park_no,
+        total_lots,
+        available_lots,
+        update_datetime,
+        lot_type
+        )
+        values(
+        <foreach item="a" collection="data" separator="),(">
+            #{a.carParkNo,jdbcType=VARCHAR},
+            #{a.totalLots,jdbcType=NUMERIC},
+            #{a.availableLots,jdbcType=NUMERIC},
+            #{a.updateDatetime,jdbcType=TIMESTAMP},
+            #{a.lotType,jdbcType=VARCHAR}
+        </foreach>
+        )
+
+    </insert>
+
+    <delete id="delete">
+        delete from car_park.carpark_data
+    </delete>
+
+</mapper>

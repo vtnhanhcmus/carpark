@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpark.mappers.AvailabilityMapper" >
+
+    <insert id="insert">
+        REPLACE into
+        car_park.availability(
+        car_park_no,
+        total_lots,
+        available_lots,
+        update_datetime,
+        lot_type
+        )
+
+        SELECT
+        avai.car_park_no,
+        avai.total_lots,
+        avai.available_lots,
+        avai.update_datetime,
+        avai.lot_type
+        FROM
+        car_park.carpark_data avai
+        left join car_park.carpark_data da on avai.car_park_no = da.car_park_no
+        inner join car_park.car_park cp on avai.car_park_no = cp.car_park_no
+
+    </insert>
+
+</mapper>

@@ -1,4 +1,4 @@
-package com.carpark.rests.view;
+package com.carpark.rests.response;
 
 import org.springframework.http.HttpStatus;
 

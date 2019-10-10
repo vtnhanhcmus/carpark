@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("migrate")
+@RequestMapping("api/migrate")
 public class MigrateRestController {
 
     @Autowired

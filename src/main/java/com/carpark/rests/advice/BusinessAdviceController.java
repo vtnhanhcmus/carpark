@@ -1,7 +1,7 @@
 package com.carpark.rests.advice;
 
 import com.carpark.exceptions.PagingException;
-import com.carpark.rests.view.ApiError;
+import com.carpark.rests.response.ApiError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
