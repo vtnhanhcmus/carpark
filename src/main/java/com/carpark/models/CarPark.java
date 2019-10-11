@@ -2,7 +2,6 @@ package com.carpark.models;
 
 public class CarPark {
 
-    private Integer id;
     private String carParkNo;
     private String address;
     private Double xCoord;
@@ -16,14 +15,6 @@ public class CarPark {
     private Double gantryHeight;
     private String carParkBasement;
     private Availability availability;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getCarParkNo() {
         return carParkNo;

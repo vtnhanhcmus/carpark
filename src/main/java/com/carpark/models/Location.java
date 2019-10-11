@@ -1,13 +1,27 @@
-package com.carpark.request;
+package com.carpark.models;
 
-public class LocationCriteria {
 
+public class Location {
+
+    private String carParkNo;
     private Double latitude;
     private Double longitude;
 
-    public LocationCriteria(Double latitude, Double longitude) {
+    public Location() {
+    }
+
+    public Location(String carParkNo, Double latitude, Double longitude) {
+        this.carParkNo = carParkNo;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getCarParkNo() {
+        return carParkNo;
+    }
+
+    public void setCarParkNo(String carParkNo) {
+        this.carParkNo = carParkNo;
     }
 
     public Double getLatitude() {

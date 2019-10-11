@@ -1,15 +1,16 @@
 package com.carpark.mappers;
 
+import com.carpark.criterias.SearchCriteria;
 import com.carpark.models.CarPark;
-import com.carpark.request.LocationCriteria;
-import com.carpark.request.PagingCriteria;
+import com.carpark.models.Coordinates;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 @Mapper
 public interface CarParkMapper {
-    List<CarPark> search(@Param("location") LocationCriteria location,
-                         @Param("page")PagingCriteria pagingCriteria);
-    Integer count(@Param("location") LocationCriteria location);
+    List<CarPark> search(@Param("search") SearchCriteria searchCriteria);
+    Integer count(@Param("search") SearchCriteria searchCriteria);
+    List<Coordinates> findCoordinates();
 }

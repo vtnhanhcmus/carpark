@@ -11,7 +11,6 @@
         update_datetime,
         lot_type
         )
-
         SELECT
         avai.car_park_no,
         avai.total_lots,
@@ -20,7 +19,6 @@
         avai.lot_type
         FROM
         car_park.carpark_data avai
-        left join car_park.carpark_data da on avai.car_park_no = da.car_park_no
         inner join car_park.car_park cp on avai.car_park_no = cp.car_park_no
 
     </insert>

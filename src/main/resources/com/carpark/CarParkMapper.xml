@@ -7,23 +7,43 @@
         <result column="latitude" property="latitude" jdbcType="DOUBLE" />
         <result column="longitude" property="longitude" jdbcType="DOUBLE" />
         <result column="total_lots" property="totalLots" jdbcType="INTEGER" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
         <result column="available_lots" property="availableLots" jdbcType="INTEGER" />
-
     </resultMap>
+
+    <resultMap id="coordinatesResultMap" type="Coordinates" >
+        <id column="car_park_no" property="carParkNo" jdbcType="VARCHAR" />
+        <result column="x_coord" property="xCoord" jdbcType="DOUBLE" />
+        <result column="y_coord" property="yCoord" jdbcType="DOUBLE" />
+    </resultMap>
+
+    <select id="findCoordinates" resultMap="coordinatesResultMap">
+        select
+             car_park_no,
+             x_coord,
+             y_coord
+         from car_park.car_park
+    </select>
+
 
     <select id="search" resultMap="nearestResultMap">
         select
         <include refid="nearestFields"/>
         <include refid="mainLocationNearest"/>
         <include refid="nearestOrder"/>
-        limit #{page.offset}, #{page.size}
+        limit #{search.offset}, #{search.perPage}
     </select>
 
     <sql id="nearestFields">
-        cp.x_coord as latitude,
-        cp.y_coord as longitude,
+        lo.latitude,
+        lo.longitude,
+        cp.address,
         a.total_lots,
-        a.available_lots
+        a.available_lots,
+        ST_Distance_Sphere(
+            point(lo.latitude, lo.longitude),
+            point(#{search.latitude}, #{search.longitude})
+        ) as distance
     </sql>
     
     <select id="count" resultType="int">
@@ -35,13 +55,12 @@
     <sql id="mainLocationNearest">
 
         from car_park.car_park cp
-        inner join car_park.availability a on cp.id = a.car_park_id
-
+        inner join car_park.availability a on cp.car_park_no = a.car_park_no
+        inner join car_park.location lo on cp.car_park_no = lo.car_park_no
     </sql>
 
     <sql id="nearestOrder">
-
+        order by distance
     </sql>
-    
 
 </mapper>

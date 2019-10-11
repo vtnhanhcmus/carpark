@@ -1,4 +1,4 @@
-package com.carpark.request;
+package com.carpark.criterias;
 
 import java.util.Objects;
 

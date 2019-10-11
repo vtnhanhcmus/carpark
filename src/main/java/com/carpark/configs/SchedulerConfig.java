@@ -1,4 +1,4 @@
-package com.carpark.config;
+package com.carpark.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;

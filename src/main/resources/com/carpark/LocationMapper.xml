@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carpark.mappers.LocationMapper" >
+
+    <insert id="insert">
+        REPLACE into car_park.location
+        (
+            car_park_no,
+            latitude,
+            longitude
+        )
+        VALUES
+        <foreach collection="locations" item="element" index="index" separator=",">
+            (
+            #{element.carParkNo},
+            #{element.latitude},
+            #{element.longitude}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

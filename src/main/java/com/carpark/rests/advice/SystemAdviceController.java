@@ -1,5 +1,6 @@
 package com.carpark.rests.advice;
 
+import com.carpark.exceptions.InvalidResourceException;
 import com.carpark.rests.response.ApiError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +52,7 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
 
         ApiError apiError =
                 new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
-        return new ResponseEntity<Object>(
+        return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
     }
 
@@ -61,7 +64,7 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
 
         ApiError apiError =
                 new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
-        return new ResponseEntity<Object>(
+        return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
     }
 
@@ -82,11 +85,46 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({ Exception.class })
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
     public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
+
+        ex.printStackTrace();
+
         ApiError apiError = new ApiError(
-                HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "error occurred");
-        return new ResponseEntity<Object>(
+                HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage());
+        return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler({ ConstraintViolationException.class })
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<Object> handelConstraintViolation(ConstraintViolationException ex) {
+
+        ex.printStackTrace();
+
+        ApiError apiError = new ApiError(
+                HttpStatus.BAD_REQUEST, ex.getLocalizedMessage());
+        return new ResponseEntity<>(
+                apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler(InvalidResourceException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseBody
+    public ResponseEntity<Object> invalidResourceException(InvalidResourceException ex) {
+
+        List<String> errors = new ArrayList<>();
+        for (FieldError error : ex.getErrors().getFieldErrors()) {
+            errors.add(error.getField() + ": " + error.getDefaultMessage());
+        }
+
+        for (ObjectError error : ex.getErrors().getGlobalErrors()) {
+            errors.add(error.getObjectName() + ":" + error.getDefaultMessage());
+        }
+
+        return ResponseEntity.unprocessableEntity().body(errors.toArray());
     }
 
 }
