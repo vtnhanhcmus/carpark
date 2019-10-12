@@ -10,7 +10,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@ComponentScan("com.carpark")
+@ComponentScan(basePackages="com.carpark")
 public class AppConfig {
 
     @Bean
