@@ -1,4 +1,4 @@
-package com.carpark.advice;
+package com.carpark.rest.advice;
 
 import com.carpark.exceptions.PagingException;
 import com.carpark.response.ApiError;

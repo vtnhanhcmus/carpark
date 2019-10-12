@@ -1,4 +1,4 @@
-package com.carpark.advice;
+package com.carpark.rest.advice;
 
 import com.carpark.response.ApiError;
 import org.springframework.http.HttpHeaders;

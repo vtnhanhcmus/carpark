@@ -1,36 +1,66 @@
-package com.carpark.api;
+package com.carpark.externalapis;
 
-import com.carpark.response.json.AvailabilityJson;
-import com.carpark.response.json.LocationJson;
 import com.carpark.exceptions.ApiCarParkException;
 import com.carpark.models.Availability;
 import com.carpark.models.Coordinates;
+import com.carpark.models.Location;
+import com.carpark.response.json.AvailabilityJson;
+import com.carpark.response.json.LocationJson;
+import com.carpark.services.CarParkService;
+import com.carpark.services.LocationService;
 import com.carpark.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ApiCarParkLogic {
+public class ExternalCarParkApi {
+
+    private static final String headerName = "Accept";
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${api.carpark.convert.location}")
-    private String urlCoordinate;
-
-    @Value("${api.carpark.availability}")
-    private String urlAvailability;
-
     @Autowired
     private MessageSource messageSource;
 
-    private static final String headerName = "Accept";
+    @Autowired
+    private Environment env;
+
+    @Autowired
+    private ExternalCarParkApi externalCarParkApi;
+
+    @Autowired
+    private CarParkService carParkService;
+
+    @Autowired
+    private LocationService locationService;
+
+    /**
+     * convert location 3857to4326
+     */
+    public void convertLocation(){
+        List<Coordinates> coordinates = carParkService.findCoordinates();
+
+        List<Location> locations = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(coordinates)){
+            for (Coordinates coordinate : coordinates){
+                LocationJson locationJson = apiConvert(coordinate);
+                locations.add(new Location(coordinate.getCarParkNo(),locationJson.getLatitude(), locationJson.getLongitude()));
+            }
+        }
+
+        locationService.insert(locations);
+
+    }
 
 
     /**
@@ -45,7 +75,7 @@ public class ApiCarParkLogic {
         HttpEntity<String> requestEntity = new HttpEntity<>(request);
 
         ResponseEntity<LocationJson> responseEntity = restTemplate.exchange(
-                String.format(urlCoordinate, coordinate.getyCoord(),coordinate.getxCoord()),
+                String.format(env.getProperty("api.carpark.convert.location"), coordinate.getyCoord(),coordinate.getxCoord()),
                 HttpMethod.GET,
                 requestEntity,
                 LocationJson.class
@@ -63,14 +93,16 @@ public class ApiCarParkLogic {
      * api get all car park availability
      * @return
      */
-    public List<Availability> apiGetCarParkAvailability() throws ApiCarParkException{
+    public List<Availability> apiAvailability() throws ApiCarParkException{
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add(headerName, MediaType.APPLICATION_JSON_VALUE);
         HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
 
+        String url = env.getProperty("api.carpark.availability");
+
         ResponseEntity<AvailabilityJson> responseEntity = restTemplate.exchange(
-                String.format(urlAvailability, DateUtils.convertToSGTTime(LocalDateTime.now())),
+                String.format(env.getProperty("api.carpark.availability"), DateUtils.convertToSGTTime(LocalDateTime.now())),
                 HttpMethod.GET,
                 requestEntity,
                 AvailabilityJson.class

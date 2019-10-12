@@ -18,7 +18,7 @@ public class CarParkLogic {
     private CarParkMapper carParkMapper;
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     public List<CarPark> search(SearchCriteria searchCriteria) throws PagingException{
 

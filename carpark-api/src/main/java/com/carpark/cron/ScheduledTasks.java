@@ -1,9 +1,8 @@
 package com.carpark.cron;
 
-import com.carpark.api.ApiCarParkLogic;
+import com.carpark.externalapis.ExternalCarParkApi;
 import com.carpark.exceptions.ApiCarParkException;
 import com.carpark.models.Availability;
-import com.carpark.services.CarParkService;
 import com.carpark.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,17 +14,14 @@ import java.util.List;
 public class ScheduledTasks {
 
     @Autowired
-    private ApiCarParkLogic apiCarParkLogic;
-
-    @Autowired
-    private CarParkService carParkService;
+    private ExternalCarParkApi externalCarParkApi;
 
     @Autowired
     private ScheduleService scheduleService;
 
     @Scheduled(cron = "${api.carpark.scheduler.pattern}")
-    public void scheduleWithCarParkAvailability() throws ApiCarParkException {
-        List<Availability> availabilities = apiCarParkLogic.apiGetCarParkAvailability();
+    public void schedule() throws ApiCarParkException {
+        List<Availability> availabilities = externalCarParkApi.apiAvailability();
         scheduleService.schedule(availabilities);
     }
 

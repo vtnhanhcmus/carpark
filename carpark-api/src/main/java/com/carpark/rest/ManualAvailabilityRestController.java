@@ -1,8 +1,7 @@
 package com.carpark.rest;
 
-import com.carpark.cron.ConvertLocationLogic;
 import com.carpark.cron.ScheduledTasks;
-import com.carpark.exceptions.CronJobException;
+import com.carpark.externalapis.ExternalCarParkApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,19 +19,19 @@ public class ManualAvailabilityRestController {
     private ScheduledTasks scheduledTasks;
 
     @Autowired
-    private ConvertLocationLogic convertLocationLogic;
+    private ExternalCarParkApi externalCarParkApi;
 
     @GetMapping(value = "/availability", produces = "application/json")
     @ResponseBody
-    public ResponseEntity availability() throws CronJobException {
-        scheduledTasks.scheduleWithCarParkAvailability();
+    public ResponseEntity availability(){
+        scheduledTasks.schedule();
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/convert/location", produces = "application/json")
     @ResponseBody
     public ResponseEntity convertLocation() throws IOException {
-        convertLocationLogic.convertLocation();
+        externalCarParkApi.convertLocation();
         return ResponseEntity.ok().build();
     }
 

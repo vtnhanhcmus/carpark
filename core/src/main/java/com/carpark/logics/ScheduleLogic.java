@@ -14,7 +14,7 @@ public class ScheduleLogic {
     @Autowired
     private CarParkDataMapper carParkDataMapper;
     @Autowired
-    AvailabilityMapper availabilityMapper;
+    private AvailabilityMapper availabilityMapper;
 
     public void schedule(List<Availability> availabilities){
         carParkDataMapper.delete();

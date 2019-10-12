@@ -16,6 +16,16 @@ public class CarPark {
     private String carParkBasement;
     private Availability availability;
 
+    public CarPark() {
+    }
+
+    public CarPark(String carParkNo, String address, Double xCoord, Double yCoord) {
+        this.carParkNo = carParkNo;
+        this.address = address;
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+    }
+
     public String getCarParkNo() {
         return carParkNo;
     }
