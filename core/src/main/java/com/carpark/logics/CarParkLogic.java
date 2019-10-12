@@ -3,8 +3,8 @@ package com.carpark.logics;
 import com.carpark.criterias.SearchCriteria;
 import com.carpark.exceptions.PagingException;
 import com.carpark.mappers.CarParkMapper;
-import com.carpark.models.CarPark;
 import com.carpark.models.Coordinates;
+import com.carpark.models.Nearest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class CarParkLogic {
     @Autowired
     private MessageSource messageSource;
 
-    public List<CarPark> search(SearchCriteria searchCriteria) throws PagingException{
+    public List<Nearest> search(SearchCriteria searchCriteria) throws PagingException{
 
         Integer totalRecords = carParkMapper.count(searchCriteria);
 
@@ -28,7 +28,7 @@ public class CarParkLogic {
             throw new PagingException(messageSource.getMessage("page.range.error", null, null));
         }
 
-        List<CarPark> carParks = carParkMapper.search(searchCriteria);
+        List<Nearest> carParks = carParkMapper.search(searchCriteria);
         return carParks;
     }
 

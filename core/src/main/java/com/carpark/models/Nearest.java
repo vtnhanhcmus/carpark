@@ -5,6 +5,7 @@ public class Nearest {
     private String address;
     private Double latitude;
     private Double longitude;
+    private Double distance;
     private Integer totalLots;
     private Integer availableLots;
 
@@ -46,5 +47,13 @@ public class Nearest {
 
     public void setAvailableLots(Integer availableLots) {
         this.availableLots = availableLots;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 }

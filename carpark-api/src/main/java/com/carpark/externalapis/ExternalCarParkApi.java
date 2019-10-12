@@ -99,8 +99,6 @@ public class ExternalCarParkApi {
         requestHeaders.add(headerName, MediaType.APPLICATION_JSON_VALUE);
         HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
 
-        String url = env.getProperty("api.carpark.availability");
-
         ResponseEntity<AvailabilityJson> responseEntity = restTemplate.exchange(
                 String.format(env.getProperty("api.carpark.availability"), DateUtils.convertToSGTTime(LocalDateTime.now())),
                 HttpMethod.GET,

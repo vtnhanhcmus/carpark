@@ -4,6 +4,7 @@ import com.carpark.criterias.SearchCriteria;
 import com.carpark.logics.CarParkLogic;
 import com.carpark.models.CarPark;
 import com.carpark.models.Coordinates;
+import com.carpark.models.Nearest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class CarParkService {
     @Autowired
     private CarParkLogic carParkLogic;
 
-    public List<CarPark> search(SearchCriteria searchCriteria){
+    public List<Nearest> search(SearchCriteria searchCriteria){
         return carParkLogic.search(searchCriteria);
     }
 

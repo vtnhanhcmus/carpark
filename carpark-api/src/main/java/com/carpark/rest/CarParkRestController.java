@@ -1,7 +1,7 @@
 package com.carpark.rest;
 
 import com.carpark.criterias.SearchCriteria;
-import com.carpark.models.CarPark;
+import com.carpark.models.Nearest;
 import com.carpark.services.CarParkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class CarParkRestController {
 
     @GetMapping(value = "/nearest", produces = "application/json")
     @ResponseBody
-    public List<CarPark> nearest(
+    public List<Nearest> nearest(
             @Min(value = -90) @Max(value = 90) @RequestParam(value = "latitude") Double latitude,
             @Min(value = -180) @Max(value = 180) @RequestParam("longitude") Double longitude,
             @Min(value = 1) @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
