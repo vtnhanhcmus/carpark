@@ -1,11 +1,15 @@
 package com.carpark.rest.response.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class ItemInfoJson {
 
+    @JsonProperty("timestamp")
     String timestamp;
-    List<CarParkJson> carpark_data;
+    @JsonProperty("carpark_data")
+    List<CarParkJson> carParkData;
 
     public ItemInfoJson() {
     }
@@ -18,11 +22,11 @@ public class ItemInfoJson {
         this.timestamp = timestamp;
     }
 
-    public List<CarParkJson> getCarpark_data() {
-        return carpark_data;
+    public List<CarParkJson> getCarParkData() {
+        return carParkData;
     }
 
-    public void setCarpark_data(List<CarParkJson> carpark_data) {
-        this.carpark_data = carpark_data;
+    public void setCarParkData(List<CarParkJson> carParkData) {
+        this.carParkData = carParkData;
     }
 }

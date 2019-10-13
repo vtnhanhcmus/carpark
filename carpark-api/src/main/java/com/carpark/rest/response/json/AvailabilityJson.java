@@ -29,14 +29,14 @@ public class AvailabilityJson {
             List<Availability> availabilities = new ArrayList<>();
 
             items.forEach(itemInfoJson -> {
-                itemInfoJson.carpark_data.forEach(carParkJson -> {
-                    carParkJson.getCarpark_info().forEach(carParkInfoJson -> {
+                itemInfoJson.carParkData.forEach(carParkJson -> {
+                    carParkJson.getCarParkInfos().forEach(carParkInfoJson -> {
                         availabilities.add(new Availability(
-                            carParkInfoJson.getTotal_lots(),
-                            carParkInfoJson.getLots_available(),
-                            carParkInfoJson.getLot_type(),
-                            carParkJson.getCarpark_number(),
-                            DateUtils.convertStringToTime(carParkJson.getUpdate_datetime())
+                            carParkInfoJson.getTotalLots(),
+                            carParkInfoJson.getLotsAvailable(),
+                            carParkInfoJson.getLotType(),
+                            carParkJson.getCarParkNumber(),
+                            DateUtils.convertStringToTime(carParkJson.getUpdateDatetime())
                         ));
                     });
                 });

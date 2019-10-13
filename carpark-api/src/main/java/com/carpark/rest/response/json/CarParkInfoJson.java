@@ -1,37 +1,42 @@
 package com.carpark.rest.response.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 public class CarParkInfoJson implements Serializable {
 
-    private Integer total_lots;
-    private String lot_type;
-    private Integer lots_available;
+    @JsonProperty("total_lots")
+    private Integer totalLots;
+    @JsonProperty("lot_type")
+    private String lotType;
+    @JsonProperty("lots_available")
+    private Integer lotsAvailable;
 
     public CarParkInfoJson() {
     }
 
-    public Integer getTotal_lots() {
-        return total_lots;
+    public Integer getTotalLots() {
+        return totalLots;
     }
 
-    public void setTotal_lots(int total_lots) {
-        this.total_lots = total_lots;
+    public void setTotalLots(int totalLots) {
+        this.totalLots = totalLots;
     }
 
-    public String getLot_type() {
-        return lot_type;
+    public String getLotType() {
+        return lotType;
     }
 
-    public void setLot_type(String lot_type) {
-        this.lot_type = lot_type;
+    public void setLotType(String lotType) {
+        this.lotType = lotType;
     }
 
-    public Integer getLots_available() {
-        return lots_available;
+    public Integer getLotsAvailable() {
+        return lotsAvailable;
     }
 
-    public void setLots_available(Integer lots_available) {
-        this.lots_available = lots_available;
+    public void setLotsAvailable(Integer lotsAvailable) {
+        this.lotsAvailable = lotsAvailable;
     }
 }

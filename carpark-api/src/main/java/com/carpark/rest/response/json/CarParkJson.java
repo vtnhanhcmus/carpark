@@ -1,37 +1,42 @@
 package com.carpark.rest.response.json;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class CarParkJson {
 
-    private List<CarParkInfoJson> carpark_info;
-    private String carpark_number;
-    private String update_datetime;
+    @JsonProperty("carpark_info")
+    private List<CarParkInfoJson> carParkInfos;
+    @JsonProperty("carpark_number")
+    private String carParkNumber;
+    @JsonProperty("update_datetime")
+    private String updateDatetime;
 
     public CarParkJson() {
     }
 
-    public List<CarParkInfoJson> getCarpark_info() {
-        return carpark_info;
+    public List<CarParkInfoJson> getCarParkInfos() {
+        return carParkInfos;
     }
 
-    public void setCarpark_info(List<CarParkInfoJson> carpark_info) {
-        this.carpark_info = carpark_info;
+    public void setCarParkInfos(List<CarParkInfoJson> carParkInfos) {
+        this.carParkInfos = carParkInfos;
     }
 
-    public String getCarpark_number() {
-        return carpark_number;
+    public String getCarParkNumber() {
+        return carParkNumber;
     }
 
-    public void setCarpark_number(String carpark_number) {
-        this.carpark_number = carpark_number;
+    public void setCarParkNumber(String carParkNumber) {
+        this.carParkNumber = carParkNumber;
     }
 
-    public String getUpdate_datetime() {
-        return update_datetime;
+    public String getUpdateDatetime() {
+        return updateDatetime;
     }
 
-    public void setUpdate_datetime(String update_datetime) {
-        this.update_datetime = update_datetime;
+    public void setUpdateDatetime(String updateDatetime) {
+        this.updateDatetime = updateDatetime;
     }
 }
