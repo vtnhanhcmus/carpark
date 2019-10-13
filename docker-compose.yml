@@ -2,6 +2,8 @@ version: '3'
 services:
   nginx:
     container_name: v-nginx
+    build:
+      context: carpark-api
     image: nginx:1.13
     restart: always
     ports:
@@ -22,13 +24,11 @@ services:
       - "3306:3306"
     restart: always
 
-  app:
+  carpark-api:
     restart: always
     build: 
-      context: ./
+      context: carpark-api
       dockerfile: Dockerfile
-    expose:
-      - "8080"
     depends_on:
       - nginx
       - mysql
