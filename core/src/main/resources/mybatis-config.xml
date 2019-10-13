@@ -24,6 +24,5 @@
         <mapper resource="com/carpark/CarParkMapper.xml"/>
         <mapper resource="com/carpark/DummyMapper.xml"/>
         <mapper resource="com/carpark/LocationMapper.xml"/>
-
     </mappers>
 </configuration>
