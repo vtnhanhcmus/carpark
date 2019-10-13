@@ -27,11 +27,8 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile
-    volumes:
-      - ./:/app
     expose:
       - "8080"
     depends_on:
       - nginx
       - mysql
-    command: gradle bootRun --args='--spring.profiles.active=api'
