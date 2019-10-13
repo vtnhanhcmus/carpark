@@ -16,8 +16,8 @@ public class DummyLogic {
     private DummyMapper dummyMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    public void dummyFromCsv() throws IOException {
-        Resource resource = new ClassPathResource("data/hdb-carpark-information.csv");
+    public void dummyFromCsv(String path) throws IOException {
+        Resource resource = new ClassPathResource(path);
         dummyMapper.dummyFromCsv(resource.getFile().getAbsolutePath());
     }
 

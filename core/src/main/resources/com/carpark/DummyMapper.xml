@@ -4,7 +4,7 @@
 
     <select id="dummyFromCsv">
         LOAD DATA LOCAL INFILE #{path}
-        INTO TABLE car_park
+        INTO TABLE car_park.car_park
         FIELDS TERMINATED BY ','
         ENCLOSED BY '"'
         LINES TERMINATED BY '\n'

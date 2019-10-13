@@ -12,8 +12,8 @@ public class DummyService {
     @Autowired
     private DummyLogic dummyLogic;
 
-    public void dummyFromCsv() throws IOException {
-        dummyLogic.dummyFromCsv();
+    public void dummyFromCsv(String path) throws IOException {
+        dummyLogic.dummyFromCsv(path);
     }
 
 }
