@@ -1,4 +1,4 @@
-package com.carpark.externalapis;
+package com.carpark.rest.externalapis;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,10 +21,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class ExternalCarParkApiTest {
+public class DataSetCarParkApiTest {
 
     @InjectMocks
-    private ExternalCarParkApi externalCarParkApi;
+    private DataSetCarParkApi dataSetCarParkApi;
 
     @Mock
     private RestTemplate restTemplate;
@@ -46,7 +46,7 @@ public class ExternalCarParkApiTest {
     @Test
     public void test01(){
 
-        externalCarParkApi.apiAvailability();
+        dataSetCarParkApi.apiAvailability();
         ArgumentCaptor<RequestEntity> requestEntityArgumentCaptor = ArgumentCaptor.forClass(RequestEntity.class);
         verify(restTemplate, times(1)).exchange(requestEntityArgumentCaptor.capture(), eq(String.class));
         RequestEntity requestEntity = requestEntityArgumentCaptor.getValue();

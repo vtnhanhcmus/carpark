@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class LocationLogic {
 
     @Autowired

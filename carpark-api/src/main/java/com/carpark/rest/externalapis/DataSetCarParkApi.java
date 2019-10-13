@@ -1,11 +1,11 @@
-package com.carpark.externalapis;
+package com.carpark.rest.externalapis;
 
 import com.carpark.exceptions.ApiCarParkException;
 import com.carpark.models.Availability;
 import com.carpark.models.Coordinates;
 import com.carpark.models.Location;
-import com.carpark.response.json.AvailabilityJson;
-import com.carpark.response.json.LocationJson;
+import com.carpark.rest.response.json.AvailabilityJson;
+import com.carpark.rest.response.json.LocationJson;
 import com.carpark.services.CarParkService;
 import com.carpark.services.LocationService;
 import com.carpark.utils.DateUtils;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ExternalCarParkApi {
+public class DataSetCarParkApi {
 
     private static final String headerName = "Accept";
 
@@ -36,7 +36,7 @@ public class ExternalCarParkApi {
     private Environment env;
 
     @Autowired
-    private ExternalCarParkApi externalCarParkApi;
+    private DataSetCarParkApi dataSetCarParkApi;
 
     @Autowired
     private CarParkService carParkService;

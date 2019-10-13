@@ -1,6 +1,6 @@
 package com.carpark.rest.advice;
 
-import com.carpark.response.ApiError;
+import com.carpark.rest.response.errors.ApiError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +57,7 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
-            MethodArgumentTypeMismatchException ex, WebRequest request) {
+            MethodArgumentTypeMismatchException ex) {
         String error =
                 ex.getName() + " should be of type " + ex.getRequiredType().getName();
 
@@ -79,16 +79,14 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
 
         ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE,
                 ex.getLocalizedMessage(), builder.substring(0, builder.length() - 2));
-        return new ResponseEntity<Object>(
+        return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
     }
 
     @ExceptionHandler({ Exception.class })
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
-
-        ex.printStackTrace();
+    public ResponseEntity<Object> handleInternalErrorServer(Exception ex) {
 
         ApiError apiError = new ApiError(
                 HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage());
@@ -100,9 +98,6 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<Object> handelConstraintViolation(ConstraintViolationException ex) {
-
-        ex.printStackTrace();
-
         ApiError apiError = new ApiError(
                 HttpStatus.BAD_REQUEST, ex.getLocalizedMessage());
         return new ResponseEntity<>(

@@ -10,6 +10,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @ComponentScan(basePackages="com.carpark")
 public class AppConfig {
 

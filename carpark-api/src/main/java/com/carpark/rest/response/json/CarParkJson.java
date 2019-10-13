@@ -1,4 +1,4 @@
-package com.carpark.response.json;
+package com.carpark.rest.response.json;
 
 import java.util.List;
 

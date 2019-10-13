@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 
 @Component
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class DummyLogic {
 
     @Autowired

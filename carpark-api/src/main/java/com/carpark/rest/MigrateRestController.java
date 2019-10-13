@@ -1,7 +1,7 @@
 package com.carpark.rest;
 
 import com.carpark.cron.ScheduledTasks;
-import com.carpark.externalapis.ExternalCarParkApi;
+import com.carpark.rest.externalapis.DataSetCarParkApi;
 import com.carpark.services.DummyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -24,7 +24,7 @@ public class MigrateRestController {
     private ScheduledTasks scheduledTasks;
 
     @Autowired
-    private ExternalCarParkApi externalCarParkApi;
+    private DataSetCarParkApi dataSetCarParkApi;
 
     @Autowired
     private Environment env;
@@ -45,7 +45,7 @@ public class MigrateRestController {
     @GetMapping(value = "/convert/3857to4326", produces = "application/json")
     @ResponseBody
     public ResponseEntity convertLocation(){
-        externalCarParkApi.convertLocation();
+        dataSetCarParkApi.convertLocation();
         return ResponseEntity.ok().build();
     }
 
