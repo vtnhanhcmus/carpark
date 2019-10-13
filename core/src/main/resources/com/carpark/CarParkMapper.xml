@@ -63,4 +63,8 @@
         order by distance
     </sql>
 
+    <delete id="delete">
+        delete from car_park.car_park
+    </delete>
+
 </mapper>

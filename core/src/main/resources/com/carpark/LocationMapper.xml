@@ -19,4 +19,8 @@
         </foreach>
     </insert>
 
+    <delete id="delete">
+        delete from car_park.location
+    </delete>
+
 </mapper>

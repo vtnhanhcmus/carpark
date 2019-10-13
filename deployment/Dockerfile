@@ -4,5 +4,5 @@ EXPOSE 8080
 #ADD setup.sh /
 #RUN ["chmod", "+x", "/setup.sh"]
 #RUN /setup.sh
-ADD carpark-api-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=api","-jar","app.jar"]
+ADD carpark-api-0.0.1.jar app.jar
+ENTRYPOINT ["java","-Dspring.profiles.active=docker","-jar","app.jar"]

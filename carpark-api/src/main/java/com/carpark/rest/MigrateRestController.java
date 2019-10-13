@@ -2,6 +2,7 @@ package com.carpark.rest;
 
 import com.carpark.cron.ScheduledTasks;
 import com.carpark.rest.externalapis.DataSetCarParkApi;
+import com.carpark.rest.response.json.SuccessJson;
 import com.carpark.services.DummyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.io.IOException;
 
 @RestController
@@ -30,23 +30,24 @@ public class MigrateRestController {
     private Environment env;
 
     @GetMapping(value = "/dummy", produces = "application/json")
-    public ResponseEntity dummyCsv() throws IOException {
-        dummyService.dummyFromCsv(env.getProperty("path.csv.cark.park"));
-        return ResponseEntity.ok().build();
+    public ResponseEntity dummy() throws IOException {
+        dummyService.dummy(env.getProperty("path.csv.cark.park"));
+        dataSetCarParkApi.convertLocation();
+        return ResponseEntity.ok().body(new SuccessJson(true));
     }
 
     @GetMapping(value = "/dataset/carpark-availability", produces = "application/json")
     @ResponseBody
     public ResponseEntity availability(){
         scheduledTasks.schedule();
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(new SuccessJson(true));
     }
 
     @GetMapping(value = "/convert/3857to4326", produces = "application/json")
     @ResponseBody
     public ResponseEntity convertLocation(){
         dataSetCarParkApi.convertLocation();
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(new SuccessJson(true));
     }
 
 }

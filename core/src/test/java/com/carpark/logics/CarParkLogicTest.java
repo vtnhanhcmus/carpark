@@ -3,6 +3,8 @@ package com.carpark.logics;
 import com.carpark.criterias.SearchCriteria;
 import com.carpark.exceptions.PagingException;
 import com.carpark.mappers.CarParkMapper;
+import com.carpark.models.Nearest;
+import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.MessageSource;
 
 import java.util.Collections;
+import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
@@ -75,7 +77,7 @@ public class CarParkLogicTest {
     /**
      * Test search success
      */
-    /*@Test
+    @Test
     public void test02(){
         Double latitude = 0.3480936981054125;
         Double longitude = 0.25992014061340224;
@@ -83,11 +85,16 @@ public class CarParkLogicTest {
         Integer page = 1;
         SearchCriteria searchCriteria = new SearchCriteria(latitude, longitude, perPage, page);
 
-        Nearest nearest = new Nearest("A1", "BLK 215 ANG MO KIO STREET 22", 28934.1777, 38749.8516);
+        Nearest nearest = new Nearest("BLK 215 ANG MO KIO STREET 22",
+                0.3477885738774403,
+                0.273482285833808,
+                100.0,
+                100,
+                5);
 
         when(carParkMapper.count(searchCriteria)).thenReturn(1);
         when(carParkMapper.search(searchCriteria)).thenReturn(Lists.list(nearest));
         List<Nearest> carParks = carParkLogic.search(searchCriteria);
         assertEquals(1, carParks.size());
-    }*/
+    }
 }

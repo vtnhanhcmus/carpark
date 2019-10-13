@@ -8,6 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface CarParkDataMapper {
+
     void insert(@Param("data") List<Availability> availabilities);
     void delete();
+
 }

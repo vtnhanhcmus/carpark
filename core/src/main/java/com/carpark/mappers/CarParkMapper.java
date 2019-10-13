@@ -13,4 +13,5 @@ public interface CarParkMapper {
     List<Nearest> search(@Param("search") SearchCriteria searchCriteria);
     Integer count(@Param("search") SearchCriteria searchCriteria);
     List<Coordinates> findCoordinates();
+    void delete();
 }

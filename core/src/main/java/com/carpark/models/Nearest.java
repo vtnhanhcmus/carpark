@@ -9,6 +9,18 @@ public class Nearest {
     private Integer totalLots;
     private Integer availableLots;
 
+    public Nearest() {
+    }
+
+    public Nearest(String address, Double latitude, Double longitude, Double distance, Integer totalLots, Integer availableLots) {
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.distance = distance;
+        this.totalLots = totalLots;
+        this.availableLots = availableLots;
+    }
+
     public String getAddress() {
         return address;
     }

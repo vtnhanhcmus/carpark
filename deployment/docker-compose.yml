@@ -1,8 +1,8 @@
 version: '3'
 services:
 
-  mysql:
-    container_name: v-mysql
+  carpark-db:
+    container_name: carpark-mysql
     image: mysql/mysql-server:5.7
     environment:
       MYSQL_DATABASE: car_park
@@ -13,3 +13,13 @@ services:
       - "3306:3306"
     restart: always
 
+  carpark-app:
+    container_name: carpark-api
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - carpark-db
