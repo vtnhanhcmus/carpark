@@ -1,3 +1,3 @@
 cd ..
-gradle bootJar
-cp -R build/libs deployment
+./gradlew bootJar
+cp -R carpark-api/build/libs/*.jar deployment
