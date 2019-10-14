@@ -26,6 +26,18 @@ docker-compose build
 docker-compose up
 Access to http://localhost/
 ```
+If we have some problem about environment setting gradle. we don't need to run file setup.sh
+i not sure about others pc, you can use the existing jar file (/deployment/carpark-api-0.0.1.jar)
+
+```bash
+git clone https://github.com/vtnhanhcmus/carpark.git
+cd carpark
+cd deployment
+docker-compose build
+docker-compose up
+Access to http://localhost/
+```
+
 Setup with manual
 ```shell script
 git clone https://github.com/vtnhanhcmus/carpark.git
