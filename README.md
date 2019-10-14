@@ -21,18 +21,20 @@ Use [docker-compose](https://docs.docker.com/compose/) to setup.
 git clone https://github.com/vtnhanhcmus/carpark.git
 cd carpark
 cd deployment
-sh setup.sh
 docker-compose build
 docker-compose up
 Access to http://localhost/
 ```
-If we have some problem about environment setting gradle. we don't need to run file setup.sh
-i not sure about others pc, you can use the existing jar file (/deployment/carpark-api-0.0.1.jar)
+I have some problem with config gradle wrapper. </b>
+If we config gradle wrapper success, we don't need to install gradle in your pc.
+So if you wanna build new file jar at this time, you need to install gradle in your pc</b>
+And run command below
 
 ```bash
 git clone https://github.com/vtnhanhcmus/carpark.git
 cd carpark
 cd deployment
+sh setup.sh
 docker-compose build
 docker-compose up
 Access to http://localhost/
