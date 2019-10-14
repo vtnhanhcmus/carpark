@@ -57,6 +57,8 @@
         from car_park.car_park cp
         inner join car_park.availability a on cp.car_park_no = a.car_park_no
         inner join car_park.location lo on cp.car_park_no = lo.car_park_no
+        where cp.available_lots > 0
+
     </sql>
 
     <sql id="nearestOrder">
