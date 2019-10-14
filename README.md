@@ -1,5 +1,4 @@
-# Car park system
-#What you'll build
+# What you'll build
 - Set up an API-only application that would return the closest carparks to a user with the parking lot availability
 
 # What you'll need
@@ -7,7 +6,7 @@ For building and running the application you need:
 
 - [Docker](https://docs.docker.com/docker-for-mac/install)
 
-#Stack
+# Stack
 - [Docker](https://docs.docker.com/docker-for-mac/install)
 - [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
@@ -47,6 +46,3 @@ Access to http://localhost:8080/
 
 ## How to use 
 * [api documents](carpark-api/APIDOCUMENT.md)
-
-
-## Copyright
