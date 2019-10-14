@@ -56,6 +56,7 @@ public class SystemAdviceController extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
             MethodArgumentTypeMismatchException ex) {
         String error =

@@ -4,12 +4,10 @@ import com.carpark.criterias.SearchCriteria;
 import com.carpark.models.Nearest;
 import com.carpark.services.CarParkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -24,6 +22,7 @@ public class CarParkRestController {
     private CarParkService carParkService;
 
     @GetMapping(value = "/nearest", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<Nearest> nearest(
             @Min(value = -90) @Max(value = 90) @RequestParam(value = "latitude") Double latitude,

@@ -36,9 +36,6 @@ public class DataSetCarParkApi {
     private Environment env;
 
     @Autowired
-    private DataSetCarParkApi dataSetCarParkApi;
-
-    @Autowired
     private CarParkService carParkService;
 
     @Autowired
