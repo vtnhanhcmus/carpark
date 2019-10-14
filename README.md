@@ -25,9 +25,10 @@ docker-compose build
 docker-compose up
 Access to http://localhost/
 ```
-I have some problem with config gradle wrapper. </b>
-If we config gradle wrapper success, we don't need to install gradle in your pc.
+
 So if you wanna build new file jar at this time, you need to install gradle in your pc</b>
+Because I have some problem with config gradle wrapper. </b>
+If we config gradle wrapper success, we don't need to install gradle in your pc.
 And run command below
 
 ```bash
@@ -38,18 +39,6 @@ sh setup.sh
 docker-compose build
 docker-compose up
 Access to http://localhost/
-```
-
-Setup with manual
-```shell script
-git clone https://github.com/vtnhanhcmus/carpark.git
-
-# root folder project
-cd carpark
-./gradlew bootJar
-cd carpark-api
-java -jar -Dspring.profiles.active=develop build/libs/carpark-api-0.0.1.jar
-Access to http://localhost:8080/
 ```
 
 ## Overview project
