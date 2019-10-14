@@ -21,7 +21,6 @@ Use [docker-compose](https://docs.docker.com/compose/) to setup.
 git clone https://github.com/vtnhanhcmus/carpark.git
 cd carpark
 cd deployment
-sh setup.sh
 docker-compose build
 docker-compose up
 Access to http://localhost/
