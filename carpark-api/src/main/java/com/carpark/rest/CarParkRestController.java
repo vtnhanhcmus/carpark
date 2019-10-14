@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,8 @@ public class CarParkRestController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<Nearest> nearest(
-            @Min(value = -90) @Max(value = 90) @RequestParam(value = "latitude") Double latitude,
-            @Min(value = -180) @Max(value = 180) @RequestParam("longitude") Double longitude,
+            @NotNull @Min(value = -90) @Max(value = 90) @RequestParam(value = "latitude") Double latitude,
+            @NotNull @Min(value = -180) @Max(value = 180) @RequestParam("longitude") Double longitude,
             @Min(value = 1) @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
             @Min(value = 1) @RequestParam(value = "per_page", required = false, defaultValue = "20") Integer perPage) {
 

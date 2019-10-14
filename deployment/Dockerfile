@@ -1,6 +1,5 @@
 FROM gradle:5.6.2-jdk8
 VOLUME /tmp
-EXPOSE 8080
 #ADD setup.sh /
 #RUN ["chmod", "+x", "/setup.sh"]
 #RUN /setup.sh
